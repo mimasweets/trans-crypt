@@ -3,10 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal Version</title>
+    <title>Welcome to Trans Crypt</title>
 </head>
 <body>
-    <h1>Welcome to the Minimal Version</h1>
-    <p>This is a clean and minimal version of the index.html file.</p>
+    <div class="container">
+        <h1>Days Without smoking 🚭</h1>
+        
+        <div class="counter-box">
+            <div class="counter-label">Days Without Smoking</div>
+            <div class="counter-value" id="dayCount">0</div>
+            <div class="counter-subtext">Nyahh i miss it</div>
+        </div>
+
+        <div class="details">
+            <div class="detail-item">
+                <div class="detail-label">HOURS</div>
+                <div class="detail-value" id="hourCount">0</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">MINUTES</div>
+                <div class="detail-value" id="minuteCount">0</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">SECONDS</div>
+                <div class="detail-value" id="secondCount">0</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Started: Feb 17, 2026 at 4:30 PM (GMT-6) and at great cost</p>
+        </div>
+    </div>
+
+    <script>
+        function updateCounter() {
+            // Start date: February 17, 2026 at 4:30 PM GMT+6
+            // GMT+6 = UTC+6, so 4:30 PM GMT+6 = 10:30 AM UTC
+            const startDate = new Date('2026-02-17T22:30:00Z');
+            const now = new Date();
+
+            // Calculate differences
+            const totalMilliseconds = now - startDate;
+            const totalSeconds = Math.floor(totalMilliseconds / 1000);
+            const days = Math.floor(totalMilliseconds / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((totalMilliseconds / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((totalMilliseconds / (1000 * 60)) % 60);
+            const seconds = Math.floor((totalMilliseconds / 1000) % 60);
+
+            // Update DOM
+            document.getElementById('dayCount').textContent = days;
+            document.getElementById('hourCount').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minuteCount').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('secondCount').textContent = String(seconds).padStart(2, '0');
+            document.getElementById('totalSeconds').textContent = totalSeconds.toLocaleString();
+        }
+
+        // Update counter immediately and then every second
+        updateCounter();
+        setInterval(updateCounter, 1000);
+    </script>
 </body>
 </html>
